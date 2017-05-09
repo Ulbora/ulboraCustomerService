@@ -104,12 +104,13 @@ exports.updateCustomerEmail = function (json, callback) {
                                                     });
                                                 } else {
                                                     con.rollback();
+                                                    con.release();
+                                                    callback(rtn);
                                                 }
-                                                con.release();
-                                                callback(rtn);
                                             });
                                 } else {
                                     updateCustEmail(con, json, function (changeEmailResult) {
+                                        console.log("update customer email: " + JSON.stringify(changeEmailResult));
                                         if (changeEmailResult.success) {
                                             con.commit(function (err) {
                                                 if (err) {

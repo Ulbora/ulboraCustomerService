@@ -1,6 +1,7 @@
 var assert = require('assert');
 var db = require("../../../database/mysql/db");
 var cusId1;
+var cusId2;
 var clientId = "55842";
 var addressId;
 
@@ -38,6 +39,35 @@ describe('mysql DB role', function () {
                 db.addCustomer(json, function (result) {
                     if (result.success) {
                         cusId1 = result.emailAddress;
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+
+
+    
+    describe('#addCustomer()', function () {
+        it('should add a customer in db', function (done) {
+            var d = new Date();
+            var json = {
+                firstName: "rod",
+                lastName: "Johnson",
+                company: "big data",
+                primaryPhone: "1254567890",
+                secondPhone: "",
+                emailAddress: "bobbybob6@bob.com",
+                dateEntered: d,
+                clientId: clientId
+            };
+            setTimeout(function () {
+                db.addCustomer(json, function (result) {
+                    if (result.success) {
+                        cusId2 = result.emailAddress;
                         assert(true);
                     } else {
                         assert(false);
@@ -188,6 +218,7 @@ describe('mysql DB role', function () {
     });
     
     
+    
     describe('#updateCustomerEmail()', function () {
         it('should fail to update customer email in db because of duplicate', function (done) {
             var d = new Date();
@@ -201,6 +232,52 @@ describe('mysql DB role', function () {
                 db.updateCustomerEmail(json, function (result) {                    
                     if (result.success) {
                         cusId1 = json.newEmailAddress;
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+    
+    describe('#updateCustomerEmail()', function () {
+        it('should update customer email in db with no addresses', function (done) {
+            var d = new Date();
+            var json = {   
+                newEmailAddress: "bobwayne2@bob1.com",
+                dateModified: d,
+                emailAddress: cusId2,
+                clientId: clientId
+            };
+            setTimeout(function () {
+                db.updateCustomerEmail(json, function (result) {                    
+                    if (result.success) { 
+                        cusId2 = json.newEmailAddress;
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+    /*
+     
+    describe('#updateCustomerEmail()', function () {
+        it('should fail to update customer email in db because of duplicate', function (done) {
+            var d = new Date();
+            var json = {   
+                newEmailAddress: "bobwayne2@bob1.com",
+                dateModified: d,
+                emailAddress: "bobbybob6@bob.com",
+                clientId: clientId
+            };
+            setTimeout(function () {
+                db.updateCustomerEmail(json, function (result) {                    
+                    if (result.success) {                        
                         assert(false);
                     } else {
                         assert(true);
@@ -209,8 +286,8 @@ describe('mysql DB role', function () {
                 });
             }, 1000);
         });
-    });
-    /*
+    }); 
+    
     describe('#deleteAddressByCustomer()', function () {
         it('should delete Customer address by customer', function (done) {
             setTimeout(function () {
