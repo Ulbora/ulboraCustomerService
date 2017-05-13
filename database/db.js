@@ -40,3 +40,61 @@ exports.connect = function (host, user, pw, database, cpnum) {
 };
 
 
+
+
+//customer
+exports.addCustomer = function (json, callback) {
+    db.addCustomer(json, callback);
+};
+
+exports.updateCustomer = function (json, callback) {
+    db.updateCustomer(json, callback);
+};
+
+exports.updateCustomerEmail = function (json, callback) {
+    db.updateCustomerEmail(json, callback);
+};
+
+
+exports.getCustomer = function (email, clientId, callback) {
+    db.getCustomer(email, clientId, callback);
+};
+
+exports.getCustomerList = function (callback) {
+    db.getCustomerList(callback);
+};
+
+exports.getCustomerListByClientId = function (clientId, callback) {
+    db.getCustomerListByClientId(clientId, callback);
+};
+
+exports.deleteCustomer = function (email, clientId, callback) {
+    db.deleteCustomer(email, clientId, callback);
+};
+
+//end user
+
+//address 
+exports.addAddress = function (json, callback) {
+    db.addAddress(json, callback);
+};
+
+exports.updateAddress = function (json, callback) {
+    db.updateAddress(json, callback);
+};
+
+exports.getAddress = function (id, callback) {
+    db.getAddress(id, callback);
+};
+
+exports.getAddressListByCustomer = function (email, clientId, callback) {
+    db.getAddressListByCustomer(email, clientId, callback);
+};
+
+exports.deleteAddress = function (id, callback) {
+    db.deleteAddress(id, callback);
+};
+
+exports.deleteAddressByCustomer = function (email, clientId, callback) {
+    db.deleteAddressByCustomer(email, clientId, callback);
+};

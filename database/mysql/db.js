@@ -39,9 +39,7 @@ exports.getConnection = function (callback) {
 };
 
 
-//end role
-
-//user
+//customer
 exports.addCustomer = function (json, callback) {
     customerProcessor.addCustomer(null, json, callback);
 };

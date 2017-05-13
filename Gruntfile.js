@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                     quiet: false, // Optionally suppress output to standard out (defaults to false) 
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
                 },
-                src: ['test/**/*Test.js']
+                src: ['tests/**/*Test.js']
             },
             testMysql: {
                 options: {
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                     quiet: false, // Optionally suppress output to standard out (defaults to false) 
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
                 },
-                src: ['test/database/mysql/**/*Test.js']
+                src: ['tests/database/mysql/**/*Test.js']
             },
             testMysqlDbOnly: {
                 options: {
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                     quiet: false, // Optionally suppress output to standard out (defaults to false) 
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
                 },
-                src: ['test/database/mysql/**/*Test.js']
+                src: ['tests/database/mysql/**/db*Test.js']
             },
             testDbOnly: {
                 options: {
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
                     quiet: false, // Optionally suppress output to standard out (defaults to false) 
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
                 },
-                src: ['test/database/**/*Test.js']
+                src: ['tests/database/**/*Test.js']
             },
             testIndividualTestOnly: {
                 options: {
@@ -51,8 +51,8 @@ module.exports = function (grunt) {
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
                 },
                 //src: ['tests/webControllers/tokenControllerTest.js']
-                //src: ['tests/database/dbUserTest.js']
-                src: ['tests/database/mysql/dbAddressTest.js']
+                src: ['tests/database/dbCustomerTest.js']
+                //src: ['tests/database/mysql/dbCustomerTest.js']
                 //src: ['tests/database/mysql/processors/addressProcessorTest.js']
                 //src: ['tests/managers/mailManagerTest.js']
                 //src: ['tests/managers/clientRedirectUriManagerTest.js']
