@@ -317,7 +317,7 @@ describe('mysql DB address', function () {
     
     
     
-     
+     /*
     describe('#deleteAddressByCustomer()', function () {
         it('should delete Customer address by customer', function (done) {
             setTimeout(function () {
@@ -332,7 +332,7 @@ describe('mysql DB address', function () {
             }, 1000);
         });
     });
-
+*/
     
     describe('#deleteCustomer()', function () {
         it('should delete Customer', function (done) {

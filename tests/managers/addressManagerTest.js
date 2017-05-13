@@ -1,21 +1,23 @@
 var assert = require('assert');
 var db = require("../../database/db");
+var addressManager = require("../../managers/addressManager");
 var cusId1;
 var cusId2;
-var clientId = "65842";
+var clientId = "65858";
 var addressId;
-
-describe('DB address', function () {
+describe('Address Manager', function () {
     this.timeout(20000);
-    describe('#connect()', function () {
-        it('should connect to db and create pool', function (done) {
-            db.connect("localhost", "admin", "admin", "ulbora_customer_service", 5);    
+    describe('#init()', function () {
+        it('should init manager', function (done) {
+            db.connect("localhost", "admin", "admin", "ulbora_customer_service", 5);
             setTimeout(function () {
+                addressManager.init(db);
                 done();
             }, 1000);
         });
     });
-       
+    
+    
     
     describe('#addCustomer()', function () {
         it('should add a customer in db', function (done) {
@@ -46,36 +48,8 @@ describe('DB address', function () {
 
 
     
-    describe('#addCustomer()', function () {
-        it('should add a customer in db', function (done) {
-            var d = new Date();
-            var json = {
-                firstName: "rod",
-                lastName: "Johnson",
-                company: "big data",
-                primaryPhone: "1254567890",
-                secondPhone: "",
-                emailAddress: "bobby60@bob.com",
-                dateEntered: d,
-                clientId: clientId
-            };
-            setTimeout(function () {
-                db.addCustomer(json, function (result) {
-                    if (result.success) {
-                        cusId2 = result.emailAddress;
-                        assert(true);
-                    } else {
-                        assert(false);
-                    }
-                    done();
-                });
-            }, 1000);
-        });
-    });
-
-    
     describe('#addCustomerAddress()', function () {
-        it('should add a customer address in addressProcessor', function (done) {
+        it('should add a customer address in manager', function (done) {
             var d = new Date();
             var json = {
                 address1: "125 river rd",
@@ -89,7 +63,7 @@ describe('DB address', function () {
                 clientId: clientId
             };
             setTimeout(function () {
-                db.addAddress(json, function (result) {
+                addressManager.addAddress(json, function (result) {
                     if (result.success) {
                         addressId = result.id;
                         assert(true);
@@ -104,7 +78,7 @@ describe('DB address', function () {
     
     
     describe('#addCustomerAddress()', function () {
-        it('should add a customer address in addressProcessor', function (done) {
+        it('should add a customer address in manager', function (done) {
             var d = new Date();
             var json = {
                 address1: "1245 river rd",
@@ -118,7 +92,7 @@ describe('DB address', function () {
                 clientId: clientId
             };
             setTimeout(function () {
-                db.addAddress(json, function (result) {
+                addressManager.addAddress(json, function (result) {
                     if (result.success) {                        
                         assert(true);
                     } else {
@@ -132,7 +106,7 @@ describe('DB address', function () {
     
     
     describe('#addCustomerAddress()', function () {
-        it('should add a customer address in addressProcessor', function (done) {
+        it('should add a customer address in manager', function (done) {
             var d = new Date();
             var json = {
                 address1: "1246 river rd",
@@ -146,7 +120,7 @@ describe('DB address', function () {
                 clientId: clientId
             };
             setTimeout(function () {
-                db.addAddress(json, function (result) {
+                addressManager.addAddress(json, function (result) {
                     if (result.success) {                        
                         assert(true);
                     } else {
@@ -159,8 +133,7 @@ describe('DB address', function () {
     });
     
     describe('#updateCustomerAddress()', function () {
-        it('should update a customer address in addressProcessor', function (done) {
-            var d = new Date();
+        it('should update a customer address in manager', function (done) {            
             var json = {
                 address1: "Peachtree st",
                 address2: "",
@@ -172,7 +145,8 @@ describe('DB address', function () {
                 id: addressId
             };
             setTimeout(function () {
-                db.updateAddress(json, function (result) {
+                addressManager.updateAddress(json, function (result) {
+                    console.log("update address results: " + JSON.stringify(result));
                     if (result.success) {                       
                         assert(true);
                     } else {
@@ -186,9 +160,9 @@ describe('DB address', function () {
 
     
     describe('#getAddress()', function () {
-        it('should get address in processor', function (done) {
+        it('should get address in manager', function (done) {
             setTimeout(function () {
-                db.getAddress(addressId, function (result) {
+                addressManager.getAddress(addressId, function (result) {
                     if (result && result.address1 === "Peachtree st" && result.city === "atlanta") {
                         assert(true);
                     } else {
@@ -202,10 +176,10 @@ describe('DB address', function () {
     
     
     
-    describe('#getAddressByCustomer()', function () {
-        it('should get address list in processor', function (done) {
+    describe('#getAddressListByCustomer()', function () {
+        it('should get address list in manager', function (done) {
             setTimeout(function () {
-                db.getAddressListByCustomer(cusId1, clientId, function ( result) {
+                addressManager.getAddressListByCustomer(cusId1, clientId, function ( result) {
                     console.log("address list: " + JSON.stringify(result));
                     if (result && result.length > 0) {
                         if (result[0].address1 === "Peachtree st" && result[0].city === "atlanta") {
@@ -224,9 +198,9 @@ describe('DB address', function () {
     
     
     describe('#deleteAddress()', function () {
-        it('should delete Customer address', function (done) {
+        it('should delete Customer address in manager', function (done) {
             setTimeout(function () {
-                db.deleteAddress(addressId, function (result) {
+                addressManager.deleteAddress(addressId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {
@@ -237,86 +211,12 @@ describe('DB address', function () {
             }, 1000);
         });
     });
-    
-    
-    
-    describe('#updateCustomerEmail()', function () {
-        it('should fail to update customer email in db because of duplicate', function (done) {
-            var d = new Date();
-            var json = {   
-                newEmailAddress: "bobby60@bob.com",
-                dateModified: d,
-                emailAddress: cusId1,
-                clientId: clientId
-            };
-            setTimeout(function () {
-                db.updateCustomerEmail(json, function (result) {                    
-                    if (result.success) {                        
-                        assert(false);
-                    } else {
-                        assert(true);
-                    }
-                    done();
-                });
-            }, 1000);
-        });
-    });
-    
-    describe('#updateCustomerEmail()', function () {
-        it('should update customer email in db with no addresses', function (done) {
-            var d = new Date();
-            var json = {   
-                newEmailAddress: "bobby600@bob.com",
-                dateModified: d,
-                emailAddress: cusId2,
-                clientId: clientId
-            };
-            setTimeout(function () {
-                db.updateCustomerEmail(json, function (result) {                    
-                    if (result.success) { 
-                        cusId2 = json.newEmailAddress;
-                        assert(true);
-                    } else {
-                        assert(false);
-                    }
-                    done();
-                });
-            }, 1000);
-        });
-    });
-    
-    
-    
-    describe('#updateCustomerEmail()', function () {
-        it('should update customer email in db with no addresses', function (done) {
-            var d = new Date();
-            var json = {   
-                newEmailAddress: "bobby500@bob.com",
-                dateModified: d,
-                emailAddress: cusId1,
-                clientId: clientId
-            };
-            setTimeout(function () {
-                db.updateCustomerEmail(json, function (result) {                    
-                    if (result.success) { 
-                        cusId1 = json.newEmailAddress;
-                        assert(true);
-                    } else {
-                        assert(false);
-                    }
-                    done();
-                });
-            }, 1000);
-        });
-    });
-    
-    
-    
-     /*
+       
+ /*    
     describe('#deleteAddressByCustomer()', function () {
-        it('should delete Customer address by customer', function (done) {
+        it('should delete Customer address by customer in manager', function (done) {
             setTimeout(function () {
-                db.deleteAddressByCustomer(cusId1, clientId, function (result) {
+                addressManager.deleteAddressByCustomer(cusId1, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {
@@ -327,8 +227,8 @@ describe('DB address', function () {
             }, 1000);
         });
     });
-
-    */
+*/
+    
     describe('#deleteCustomer()', function () {
         it('should delete Customer', function (done) {
             setTimeout(function () {
@@ -344,23 +244,8 @@ describe('DB address', function () {
         });
     });
     
-    
-    describe('#deleteCustomer()', function () {
-        it('should delete Customer', function (done) {
-            setTimeout(function () {
-                db.deleteCustomer(cusId2, clientId, function (result) {
-                    if (result.success) {
-                        assert(true);
-                    } else {
-                        assert(false);
-                    }
-                    done();
-                });
-            }, 1000);
-        });
-    });
-    
-    
-    
+
 });
+
+
 

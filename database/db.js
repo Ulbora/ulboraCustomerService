@@ -95,6 +95,6 @@ exports.deleteAddress = function (id, callback) {
     db.deleteAddress(id, callback);
 };
 
-exports.deleteAddressByCustomer = function (email, clientId, callback) {
-    db.deleteAddressByCustomer(email, clientId, callback);
-};
+//exports.deleteAddressByCustomer = function (email, clientId, callback) {
+    //db.deleteAddressByCustomer(email, clientId, callback);
+//};

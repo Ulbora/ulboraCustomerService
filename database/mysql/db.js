@@ -186,7 +186,52 @@ exports.getCustomerListByClientId = function (clientId, callback) {
 };
 
 exports.deleteCustomer = function (email, clientId, callback) {
-    customerProcessor.deleteCustomer(null, email, clientId, callback);
+    var rtn = {
+        success: false,
+        message: null
+    };
+    crud.getConnection(function (err, con) {
+        if (!err && con) {
+            con.beginTransaction(function (err) {
+                if (!err) {
+                    addressProcessor.deleteAddressByCustomer(con, email, clientId, function (delRes) {
+                        if (delRes.success) {
+                            customerProcessor.deleteCustomer(con, email, clientId, function (cusDelRes) {
+                                if (cusDelRes.success) {
+                                    con.commit(function (err) {
+                                        if (err) {
+                                            con.rollback();
+                                        } else {
+                                            rtn.success = true;                                            
+                                        }
+                                        con.release();
+                                        callback(rtn);
+                                    });
+                                } else {
+                                    con.rollback();
+                                    con.release();
+                                    callback(rtn);
+                                }
+                            });
+                        } else {
+                            con.rollback();
+                            con.release();
+                            callback(rtn);
+                        }
+                    });
+                } else {
+                    con.release();
+                    callback(rtn);
+                }
+            });
+        } else {
+            if (con) {
+                con.release();
+            }
+            callback(rtn);
+        }
+    });
+
 };
 
 //end user
@@ -212,6 +257,6 @@ exports.deleteAddress = function (id, callback) {
     addressProcessor.deleteAddress(null, id, callback);
 };
 
-exports.deleteAddressByCustomer = function (email, clientId, callback) {
-    addressProcessor.deleteAddressByCustomer(null, email, clientId, callback);
-};
+//exports.deleteAddressByCustomer = function (email, clientId, callback) {
+    //addressProcessor.deleteAddressByCustomer(null, email, clientId, callback);
+//};
