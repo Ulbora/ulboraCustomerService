@@ -127,6 +127,7 @@ exports.deleteAddress = function (id, callback) {
     var isOk = manager.securityCheck(id);
     if (isOk) {
         db.deleteAddress(id, function (result) {
+            console.log("delete address reaponse in manager: " + JSON.stringify(result));
             if (result && result.success) {
                 returnVal.success = result.success;
                 callback(returnVal);
