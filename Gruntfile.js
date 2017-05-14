@@ -57,7 +57,7 @@ module.exports = function (grunt) {
                 //src: ['tests/managers/mailManagerTest.js']
                // src: ['tests/managers/customerManagerTest.js']
                 //src: ['tests/delegates/credentialsGrantDelegateTest.js']
-                src: ['tests/services/customerServiceTest.js']
+                src: ['tests/services/addressServiceTest.js']
                 //src: ['tests/oauth2/oauth2Test.js']
                 //src: ['tests/proxies/tokenValidationProxyTest.js']
             }

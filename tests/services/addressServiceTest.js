@@ -5,7 +5,7 @@ var tokenFile = require("./token");
 // for this tests to pass, the tokenFile needs to be updated with a new token 
 var token = tokenFile.token;
 var addressId;
-var clientId = "544166"
+var clientId = "544166";
 var cusId1;
 
 describe('addressService', function () {
@@ -193,7 +193,7 @@ describe('addressService', function () {
                     } else if (val && val.id && val.address1 === "Peachtree st") {
                         console.log("get address reaponse: " + JSON.stringify(val));
                         assert(true);
-                    }else{
+                    } else {
                         assert(false);
                     }
                     done();
@@ -204,7 +204,7 @@ describe('addressService', function () {
     });
 
 
-    
+
     describe('#addressList()', function () {
         it('should get address list for a customer', function (done) {
             setTimeout(function () {
@@ -223,7 +223,7 @@ describe('addressService', function () {
                 req.protocol = "https";
                 req.hostname = "abc.com";
                 req.body = {
-                    email: cusId1,                    
+                    email: cusId1,
                     clientId: clientId
                 };
                 req.is = function (val) {
