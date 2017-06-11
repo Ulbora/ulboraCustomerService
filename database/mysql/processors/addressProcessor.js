@@ -59,7 +59,8 @@ exports.updateAddress = function (con, json, callback) {
         json.zip,
         json.zipExt,
         json.country,
-        json.id
+        json.id,
+        json.emailAddress
     ];
     crud.update(con, addressQueries.ADDRESS_UPDATE_QUERY, args, function (result) {
         var rtn = {
@@ -72,8 +73,11 @@ exports.updateAddress = function (con, json, callback) {
 };
 
 
-exports.getAddress = function (id, callback) {
-    var queryId = [id];
+exports.getAddress = function (id, emailAddress, callback) {
+    var queryId = [
+        id,
+        emailAddress
+    ];
     crud.get(addressQueries.ADDRESS_GET_BY_ID_QUERY, queryId, function (result) {
         if (result.success && result.data.length > 0) {
             var rtn = {
@@ -102,16 +106,16 @@ exports.getAddressListByCustomer = function (email, clientId, callback) {
             var rtnList = [];
             for (var cnt = 0; cnt < result.data.length; cnt++) {
                 var rtn = {
-                    id: result.data[0].id,
-                    address1: result.data[0].address1,
-                    address2: result.data[0].address2,
-                    city: result.data[0].city,
-                    state: result.data[0].state,
-                    zip: result.data[0].zip,
-                    zipExt: result.data[0].zip_ext,
-                    country: result.data[0].country,
-                    emailAddress: result.data[0].customer_email_address,
-                    clientId: result.data[0].customer_client_id
+                    id: result.data[cnt].id,
+                    address1: result.data[cnt].address1,
+                    address2: result.data[cnt].address2,
+                    city: result.data[cnt].city,
+                    state: result.data[cnt].state,
+                    zip: result.data[cnt].zip,
+                    zipExt: result.data[cnt].zip_ext,
+                    country: result.data[cnt].country,
+                    emailAddress: result.data[cnt].customer_email_address,
+                    clientId: result.data[cnt].customer_client_id
                 };
                 rtnList.push(rtn);
             }
@@ -122,8 +126,11 @@ exports.getAddressListByCustomer = function (email, clientId, callback) {
     });
 };
 
-exports.deleteAddress = function (con, id, callback) {
-    var queryId = [id];
+exports.deleteAddress = function (con, id, emailAddress, callback) {
+    var queryId = [
+        id,        
+        emailAddress
+    ];
     crud.delete(con, addressQueries.ADDRESS_DELETE_QUERY, queryId, callback);
 };
 

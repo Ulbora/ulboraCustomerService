@@ -131,7 +131,8 @@ describe('addressService', function () {
                     zip: "12345",
                     zipExt: "1234",
                     country: "USA",
-                    id: addressId
+                    id: addressId,
+                    emailAddress: cusId1
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -181,6 +182,7 @@ describe('addressService', function () {
                 req.hostname = "abc.com";
                 req.params = {};
                 req.params.id = addressId;
+                req.params.email = cusId1;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {
@@ -275,6 +277,7 @@ describe('addressService', function () {
                 req.hostname = "abc.com";
                 req.params = {};
                 req.params.id = addressId;
+                req.params.email = cusId1;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {
@@ -298,7 +301,7 @@ describe('addressService', function () {
 
 
     describe('#get()', function () {
-        it('should get a role', function (done) {
+        it('should get a address', function (done) {
             setTimeout(function () {
                 var req = {};
                 var header = function (val) {
@@ -315,6 +318,7 @@ describe('addressService', function () {
                 req.hostname = "abc.com";
                 req.params = {};
                 req.params.id = addressId;
+                req.params.emailAddress = cusId1;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {

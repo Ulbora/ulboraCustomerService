@@ -84,8 +84,9 @@ exports.get = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
-        if (id !== null && id !== undefined) {
-            addressManager.getAddress(id, function (result) {
+        var email = req.params.email;
+        if (id !== null && id !== undefined && email !== null && email !== undefined) {
+            addressManager.getAddress(id, email, function (result) {
                 res.send(result);
             });
         } else {
@@ -131,8 +132,9 @@ exports.delete = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
-        if (id !== null && id !== undefined) {
-            addressManager.deleteAddress(id, function (result) {
+        var email = req.params.email;
+        if (id !== null && id !== undefined && email !== null && email !== undefined) {
+            addressManager.deleteAddress(id, email, function (result) {
                 res.send(result);
             });
         } else {

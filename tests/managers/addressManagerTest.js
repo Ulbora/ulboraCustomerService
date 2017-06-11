@@ -142,7 +142,8 @@ describe('Address Manager', function () {
                 zip: "12345",
                 zipExt: "1234",
                 country: "USA",
-                id: addressId
+                id: addressId,                
+                emailAddress: cusId1
             };
             setTimeout(function () {
                 addressManager.updateAddress(json, function (result) {
@@ -162,7 +163,7 @@ describe('Address Manager', function () {
     describe('#getAddress()', function () {
         it('should get address in manager', function (done) {
             setTimeout(function () {
-                addressManager.getAddress(addressId, function (result) {
+                addressManager.getAddress(addressId, cusId1, function (result) {
                     if (result && result.address1 === "Peachtree st" && result.city === "atlanta") {
                         assert(true);
                     } else {
@@ -200,7 +201,7 @@ describe('Address Manager', function () {
     describe('#deleteAddress()', function () {
         it('should delete Customer address in manager', function (done) {
             setTimeout(function () {
-                addressManager.deleteAddress(addressId, function (result) {
+                addressManager.deleteAddress(addressId, cusId1, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {

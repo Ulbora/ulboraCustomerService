@@ -32,9 +32,9 @@ exports.init = function(app, db){
     // role validation
     app.post('/rs/address/add', addressService.add);
     app.put('/rs/address/update', addressService.update);
-    app.get('/rs/address/get/:id', addressService.get);
+    app.get('/rs/address/get/:id/:email', addressService.get);
     app.post('/rs/address/list', addressService.list);  
-    app.delete('/rs/address/delete/:id', addressService.delete);
+    app.delete('/rs/address/delete/:id/:email', addressService.delete);
     
     //user services
     app.post('/rs/customer/add', customerService.add);      

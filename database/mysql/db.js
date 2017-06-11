@@ -245,16 +245,16 @@ exports.updateAddress = function (json, callback) {
     addressProcessor.updateAddress(null, json, callback);
 };
 
-exports.getAddress = function (id, callback) {
-    addressProcessor.getAddress(id, callback);
+exports.getAddress = function (id, emailAddress, callback) {
+    addressProcessor.getAddress(id, emailAddress, callback);
 };
 
 exports.getAddressListByCustomer = function (email, clientId, callback) {
     addressProcessor.getAddressListByCustomer(email, clientId, callback);
 };
 
-exports.deleteAddress = function (id, callback) {
-    addressProcessor.deleteAddress(null, id, callback);
+exports.deleteAddress = function (id, emailAddress, callback) {
+    addressProcessor.deleteAddress(null, id, emailAddress, callback);
 };
 
 //exports.deleteAddressByCustomer = function (email, clientId, callback) {

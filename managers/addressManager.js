@@ -66,7 +66,8 @@ exports.updateAddress = function (json, callback) {
                 json.zip !== undefined && json.zip !== null &&
                 json.zipExt !== undefined && json.zipExt !== null && 
                 json.country !== undefined && json.country !== null &&
-                json.id !== undefined && json.id !== null) {            
+                json.id !== undefined && json.id !== null && 
+                json.emailAddress !== undefined && json.emailAddress !== null) {            
             db.updateAddress(json, function (result) {
                 if (result && result.success) {
                     returnVal.success = result.success;
@@ -85,10 +86,10 @@ exports.updateAddress = function (json, callback) {
     }
 };
 
-exports.getAddress = function (id, callback) {
+exports.getAddress = function (id, emailAddress, callback) {
     var isOk = manager.securityCheck(id);
     if (isOk) {
-        db.getAddress(id, function (result) {
+        db.getAddress(id, emailAddress, function (result) {
             if (result) {
                 callback(result);
             } else {
@@ -119,14 +120,14 @@ exports.getAddressListByCustomer = function (email, clientId, callback) {
 
 
 
-exports.deleteAddress = function (id, callback) {
+exports.deleteAddress = function (id, emailAddress, callback) {
     var returnVal = {
         success: false,
         message: ""
     };
     var isOk = manager.securityCheck(id);
     if (isOk) {
-        db.deleteAddress(id, function (result) {
+        db.deleteAddress(id, emailAddress, function (result) {
             console.log("delete address reaponse in manager: " + JSON.stringify(result));
             if (result && result.success) {
                 returnVal.success = result.success;

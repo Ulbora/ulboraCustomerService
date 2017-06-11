@@ -83,16 +83,16 @@ exports.updateAddress = function (json, callback) {
     db.updateAddress(json, callback);
 };
 
-exports.getAddress = function (id, callback) {
-    db.getAddress(id, callback);
+exports.getAddress = function (id, emailAddress, callback) {
+    db.getAddress(id, emailAddress, callback);
 };
 
 exports.getAddressListByCustomer = function (email, clientId, callback) {
     db.getAddressListByCustomer(email, clientId, callback);
 };
 
-exports.deleteAddress = function (id, callback) {
-    db.deleteAddress(id, callback);
+exports.deleteAddress = function (id, emailAddress, callback) {
+    db.deleteAddress(id, emailAddress, callback);
 };
 
 //exports.deleteAddressByCustomer = function (email, clientId, callback) {
