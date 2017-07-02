@@ -38,5 +38,5 @@ exports.CUSTOMER_LIST_QUERY = "SELECT * FROM customer " +
                               "order by client_id, email_address ";
                       
 exports.CUSTOMER_LIST_BY_CLIENT_QUERY = "SELECT * FROM customer " +
-                                        "where client_id = ? "
+                                        "where client_id = ? " +
                                         "order by email_address ";                      

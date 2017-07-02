@@ -21,12 +21,17 @@
 
 //client   
 exports.ADDRESS_INSERT_QUERY = "INSERT INTO address Set ?";
+
 exports.ADDRESS_UPDATE_QUERY = "UPDATE address SET address1 = ?, address2 = ?, city = ?, " + 
                                "state = ?, zip = ?, zip_ext = ?, country = ? " +
                                "WHERE id = ? and customer_email_address = ?";
+                       
 exports.ADDRESS_GET_BY_ID_QUERY = "SELECT * FROM address WHERE id = ? and customer_email_address = ?";
+
 exports.ADDRESS_DELETE_QUERY = "DELETE FROM address WHERE id = ? and customer_email_address = ?";
+
 exports.ADDRESS_DELETE_BY_CUSTOMER_QUERY = "DELETE FROM address where customer_email_address = ? " + 
                                       "and customer_client_id = ? ";
+                              
 exports.ADDRESS_LIST_BY_CUSTOMER_QUERY = "SELECT * FROM address where customer_email_address = ? " + 
                                       "and customer_client_id = ? ";
