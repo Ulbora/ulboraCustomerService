@@ -60,7 +60,8 @@ exports.updateAddress = function (con, json, callback) {
         json.zipExt,
         json.country,
         json.id,
-        json.emailAddress
+        json.emailAddress,
+        json.clientId
     ];
     crud.update(con, addressQueries.ADDRESS_UPDATE_QUERY, args, function (result) {
         var rtn = {
@@ -73,10 +74,11 @@ exports.updateAddress = function (con, json, callback) {
 };
 
 
-exports.getAddress = function (id, emailAddress, callback) {
+exports.getAddress = function (id, emailAddress, clientId, callback) {
     var queryId = [
         id,
-        emailAddress
+        emailAddress,
+        clientId
     ];
     crud.get(addressQueries.ADDRESS_GET_BY_ID_QUERY, queryId, function (result) {
         if (result.success && result.data.length > 0) {
@@ -126,10 +128,11 @@ exports.getAddressListByCustomer = function (email, clientId, callback) {
     });
 };
 
-exports.deleteAddress = function (con, id, emailAddress, callback) {
+exports.deleteAddress = function (con, id, emailAddress, clientId, callback) {
     var queryId = [
         id,        
-        emailAddress
+        emailAddress,
+        clientId
     ];
     crud.delete(con, addressQueries.ADDRESS_DELETE_QUERY, queryId, callback);
 };

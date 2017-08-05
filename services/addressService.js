@@ -40,6 +40,7 @@ exports.add = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            reqBody.clientId = req.header("clientId");
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             addressManager.addAddress(reqBody, function (result) {
@@ -62,6 +63,7 @@ exports.update = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            reqBody.clientId = req.header("clientId");
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             addressManager.updateAddress(reqBody, function (result) {
@@ -85,8 +87,9 @@ exports.get = function (req, res) {
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
         var email = req.params.email;
+        var clientId = req.header("clientId");
         if (id !== null && id !== undefined && email !== null && email !== undefined) {
-            addressManager.getAddress(id, email, function (result) {
+            addressManager.getAddress(id, email, clientId, function (result) {
                 res.send(result);
             });
         } else {
@@ -108,7 +111,8 @@ exports.list = function (req, res) {
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             var email = reqBody.email;
-            var clientId = reqBody.clientId;
+            //var clientId = reqBody.clientId;
+            var clientId = req.header("clientId");
             if (email && clientId) {
                 addressManager.getAddressListByCustomer(email, clientId, function (result) {
                     res.send(result);
@@ -133,8 +137,9 @@ exports.delete = function (req, res) {
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
         var email = req.params.email;
+        var clientId = req.header("clientId");
         if (id !== null && id !== undefined && email !== null && email !== undefined) {
-            addressManager.deleteAddress(id, email, function (result) {
+            addressManager.deleteAddress(id, email, clientId, function (result) {
                 res.send(result);
             });
         } else {

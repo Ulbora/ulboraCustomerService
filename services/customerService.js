@@ -40,6 +40,7 @@ exports.add = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            reqBody.clientId = req.header("clientId");
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             customerManager.addCustomer(reqBody, function (result) {
@@ -61,6 +62,7 @@ exports.update = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            reqBody.clientId = req.header("clientId");
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             customerManager.updateCustomer(reqBody, function (result) {
@@ -84,7 +86,8 @@ exports.get = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var email = req.params.email;
-        var clientId = req.params.clientId;
+        //var clientId = req.params.clientId;
+        var clientId = req.header("clientId");
         if (email !== null && email !== undefined && clientId !== null && clientId !== undefined) {
             customerManager.getCustomer(email, clientId, function (result) {
                 res.send(result);
@@ -94,20 +97,20 @@ exports.get = function (req, res) {
         }
     });
 };
-
-exports.list = function (req, res) {
-    var me = {
-        role: "admin",
-        uri: "/rs/customer/list",
-        scope: "read"
-    };
-    oauth2.authorize(req, res, me, validationUrl, function () {
-        console.log("in auth callback");
-        customerManager.getCustomerList(function (result) {
-            res.send(result);
-        });
-    });
-};
+//
+//exports.list = function (req, res) {
+//    var me = {
+//        role: "admin",
+//        uri: "/rs/customer/list",
+//        scope: "read"
+//    };
+//    oauth2.authorize(req, res, me, validationUrl, function () {
+//        console.log("in auth callback");
+//        customerManager.getCustomerList(function (result) {
+//            res.send(result);
+//        });
+//    });
+//};
 
 //post
 exports.listByClientId = function (req, res) {
@@ -119,6 +122,7 @@ exports.listByClientId = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            reqBody.clientId = req.header("clientId");
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);            
             var clientId = reqBody.clientId;
@@ -145,7 +149,8 @@ exports.delete = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var email = req.params.email;
-        var clientId = req.params.clientId;
+        //var clientId = req.params.clientId;
+        var clientId = req.header("clientId");
         if (email !== null && email !== undefined && clientId !== null && clientId !== undefined) {
             customerManager.deleteCustomer(email, clientId, function (result) {
                 res.send(result);

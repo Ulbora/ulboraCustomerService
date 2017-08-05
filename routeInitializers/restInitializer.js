@@ -39,10 +39,10 @@ exports.init = function(app, db){
     //user services
     app.post('/rs/customer/add', customerService.add);      
     app.put('/rs/customer/update', customerService.update);
-    app.get('/rs/customer/get/:email/:clientId', customerService.get);
-    app.get('/rs/customer/list', customerService.list);  
+    app.get('/rs/customer/get/:email', customerService.get);
+    //app.get('/rs/customer/list', customerService.list);  
     app.post('/rs/customer/list', customerService.listByClientId);  
-    app.delete('/rs/customer/delete/:email/:clientId', customerService.delete);
+    app.delete('/rs/customer/delete/:email', customerService.delete);
     
        
         

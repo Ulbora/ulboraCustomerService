@@ -170,7 +170,8 @@ describe('DB address', function () {
                 zipExt: "1234",
                 country: "USA",
                 id: addressId,                
-                emailAddress: cusId1
+                emailAddress: cusId1,
+                clientId: clientId
             };
             setTimeout(function () {
                 db.updateAddress(json, function (result) {
@@ -189,7 +190,7 @@ describe('DB address', function () {
     describe('#getAddress()', function () {
         it('should get address in processor', function (done) {
             setTimeout(function () {
-                db.getAddress(addressId, cusId1, function (result) {
+                db.getAddress(addressId, cusId1, clientId, function (result) {
                     if (result && result.address1 === "Peachtree st" && result.city === "atlanta") {
                         assert(true);
                     } else {
@@ -227,7 +228,7 @@ describe('DB address', function () {
     describe('#deleteAddress()', function () {
         it('should delete Customer address', function (done) {
             setTimeout(function () {
-                db.deleteAddress(addressId, cusId1, function (result) {
+                db.deleteAddress(addressId, cusId1, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {

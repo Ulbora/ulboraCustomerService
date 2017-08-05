@@ -177,7 +177,8 @@ describe('AddressProcessor', function () {
                 zipExt: "1234",
                 country: "USA",
                 id: addressId,
-                emailAddress: cusId1
+                emailAddress: cusId1,
+                clientId: clientId
             };
             setTimeout(function () {
                 addressProcessor.updateAddress(null, json, function (result) {
@@ -195,7 +196,7 @@ describe('AddressProcessor', function () {
     describe('#getAddress()', function () {
         it('should get address in processor', function (done) {
             setTimeout(function () {
-                addressProcessor.getAddress(addressId, cusId1, function (result) {
+                addressProcessor.getAddress(addressId, cusId1, clientId, function (result) {
                     if (result && result.address1 === "Peachtree st" && result.city === "atlanta") {
                         assert(true);
                     } else {
@@ -232,7 +233,7 @@ describe('AddressProcessor', function () {
     describe('#deleteAddress()', function () {
         it('should delete Customer address', function (done) {
             setTimeout(function () {
-                addressProcessor.deleteAddress(null, addressId, cusId1, function (result) {
+                addressProcessor.deleteAddress(null, addressId, cusId1, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {
