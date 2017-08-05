@@ -23,8 +23,7 @@ Example Request
    "company":"big data",
    "primaryPhone":"1254567890",
    "secondPhone":"",
-   "emailAddress":"bobby50@bob.com",
-   "clientId":403
+   "emailAddress":"bobby50@bob.com"
 }
   
 ```
@@ -54,8 +53,7 @@ Example Request
    "company":"big data",
    "primaryPhone":"1254567890",
    "secondPhone":"",
-   "emailAddress":"bobby50@bob.com",
-   "clientId":403
+   "emailAddress":"bobby50@bob.com"
 }
   
 ```
@@ -74,7 +72,7 @@ Example Response
 
 ```
 GET:
-URL: http://localhost:3004/rs/customer/get/bobby50@bob.com/403
+URL: http://localhost:3004/rs/customer/get/bobby50@bob.com
   
 ```
 
@@ -121,8 +119,7 @@ Example Response
     "secondPhone": "",
     "dateEntered": "2017-06-11T04:00:00.000Z",
     "dateModified": null,
-    "emailAddress": "bobby50@bob.com",
-    "clientId": 403
+    "emailAddress": "bobby50@bob.com"
   }
 ]
 
@@ -152,8 +149,7 @@ Example Response
     "secondPhone": "",
     "dateEntered": "2017-06-11T04:00:00.000Z",
     "dateModified": null,
-    "emailAddress": "bobby50@bob.com",
-    "clientId": 403
+    "emailAddress": "bobby50@bob.com"
   }
 ]
 
@@ -163,7 +159,7 @@ Example Response
 
 ```
 DELETE:
-URL: http://localhost:3004/rs/customer/delete/bobby50@bob3.com/403
+URL: http://localhost:3004/rs/customer/delete/bobby50@bob3.com
   
 ```
 
@@ -194,8 +190,7 @@ Example Request
    "zip":"12345",
    "zipExt":"1234",
    "country":"USA",
-   "emailAddress":"bobby50@bob.com",
-   "clientId":403
+   "emailAddress":"bobby50@bob.com"
 }
   
 ```
@@ -265,8 +260,7 @@ Example Response
   "zip": "12345",
   "zipExt": "1234",
   "country": "USA",
-  "emailAddress": "bobby50@bob.com",
-  "clientId": 403
+  "emailAddress": "bobby50@bob.com"
 }
 
 ```
@@ -281,8 +275,7 @@ URL: http://localhost:3004/rs/address/list
 
 Example Request
 {
-   "email":"bobby50@bob.com",
-   "clientId":403
+   "email":"bobby50@bob.com"
 }
   
 ```
